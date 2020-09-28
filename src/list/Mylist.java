@@ -3,18 +3,20 @@ package list;
 
 public class Mylist<T> {
     class Node<T>{
-        private T data;
-        private Node<T> next;
+        protected T data;
+        protected Node<T> next;
 
         public Node(T info, Node<T> next) {
             this.data = data;
             this.next = next;
         }
 
-        public Node() {
+        public Node() 
+        {
         }
 
-        public Node(T data) {
+        public Node(T data) 
+        {
             this.data = data;
         }
 
@@ -25,19 +27,31 @@ public class Mylist<T> {
         public void setNext(Node<T> next) {
             this.next = next;
         }
-        
-        
+
+        class value {
+
+            public value() {
+            }
+        }
+         @Override
+        public String toString() {
+            return data + "";
+        } 
     }
+    
+    
     Node<T> head;
     Node<T> tail;
-   
+    Node<T> currentNode;
 
     public Mylist() 
     {
         head = null;
         tail = null;
     }
-    public void addToEnd(T info){
+    
+    
+    private void addToEnd(T info){
         if(head ==null){
             head = new Node(info,null);
             tail= head;
@@ -46,9 +60,11 @@ public class Mylist<T> {
             Node<T> current = new Node<>(info,null);
             tail.next = current;
             tail = current;
-                }
+            }
     }
-    public void addToBegin(T info){
+    
+    
+    private void addToBegin(T info){
         if(head ==null){
             head = new Node(info,null);
             tail= head;
@@ -58,11 +74,15 @@ public class Mylist<T> {
             head = current;
         }
     }
+    
+    
     public T pop(){
         Node<T> current = head;
         head = head.next;
         return current.data;
     }
+    
+    
     public T getIndex(int ind)
     {
         int j=0;
@@ -79,7 +99,33 @@ public class Mylist<T> {
         for(; i.next!=null; j++, i=i.next );
         return j;
     }
-            
+     public void push(T data)
+     {
+     }
+     
+     protected void push_back(T data) {
+        Node<T> nodeToAdd = new Node<T>(data);
+        if (head == null) { head = nodeToAdd; currentNode = head; }
+        else {
+            Node<T> cur = head;
+            while(cur.next != null) cur = cur.next;
+            cur.next = nodeToAdd;
+            currentNode = nodeToAdd;
+        }
+        //size++;
+    }
+    
+    protected void push_front(T value) {
+        Node<T> nodeToAdd = new Node<T>(value);
+        if (head == null) { head = nodeToAdd; currentNode = head; }
+        else {
+            nodeToAdd.next =head;
+            head = nodeToAdd;
+        }
+        
+        //size++;
+    }
+    
             
     @Override
     public String toString() {
@@ -89,4 +135,5 @@ public class Mylist<T> {
         return str;
     }
     
+   
 }
